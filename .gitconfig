@@ -1,2 +1,5 @@
+[user]
+	name = Tiffany Yang
+	email = tiffanyyang@utexas.edu
 [core]
 	excludesfile = /u/tiffany/.gitignore_global
