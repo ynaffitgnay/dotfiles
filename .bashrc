@@ -10,38 +10,7 @@ HISTFILESIZE=2000
 export VISUAL="emacs -nw"
 export EDITOR="$VISUAL"
 
-# have confirmation for remove
-alias rm="rm -i"
-
-# alias for grep (show line, ignore binary files, recursive)
-alias gr='grep -I -n -r --'
-
-# alias for finding a file in the current subdir
-alias f="find . -name"
-
-# aliases for git
-alias gs="git status"
-alias gaa="gs; git add -A; gs"
-alias gcm="git commit -m"
-
-################################################################################
-#                                                                              #
-#                                  MAC ONLY                                    #
-#                                                                              #
-################################################################################
-
-# alias to copy working directory (with escape characters)
-# alias cwd='printf "%q" "$(pwd)" | pbcopy'
-
-################################################################################
-#                                                                              #
-#                                 LINUX ONLY                                   #
-#                                                                              #
-################################################################################
-
-
-################################################################################
-#                                                                              #
-#                                LOCAL ALIASES                                 #
-#                                                                              #
-################################################################################
+# Load aliases
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
