@@ -20,6 +20,11 @@
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
+(dolist (package '(dtrt-indent auto-complete))
+  (unless (package-installed-p package)
+    (package-install package))
+     (require package))
+
 ;; To change the font size under X.
 ; (set-default-font "9x15")
 
@@ -27,6 +32,9 @@
 (if (display-graphic-p)
     (progn
       (tool-bar-mode -1)))
+
+;; Don't ask if it's okay to follow symlinks (just follow them)
+(setq vc-follow-symlinks t)
 
 ;; scroll one line at a time (less "jumpy" than defaults)    
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -39,7 +47,6 @@
 
 ;; When in text (or related mode) break the lines at 80 chars
  (setq text-mode-hook 'turn-on-auto-fill)
-; (setq fill-column 80)
 
 ;; To add line numbers in the margin
 (global-linum-mode t)
