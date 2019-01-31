@@ -10,7 +10,9 @@ For general setup, you should:
       to do this first in order to avoid having to deal with having other stuff
       in the directory.
 
-1. run setup.sh for each of the modules
+1. If you're on a mac, symbolically link everything. It'll drive you less insane.
+
+1. run setup.sh for each of the modules 
    *  if .bash_profile already existed, make sure that it also starts ssh agent.
       add the following lines to the system's .bash_profile if they're not
       already there
