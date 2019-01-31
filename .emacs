@@ -20,7 +20,7 @@
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
-(dolist (package '(dtrt-indent auto-complete))
+(dolist (package '(dtrt-indent auto-complete markdown-mode))
   (unless (package-installed-p package)
     (package-install package))
      (require package))
@@ -46,7 +46,17 @@
 ; (load "term/vt100")
 
 ;; When in text (or related mode) break the lines at 80 chars
- (setq text-mode-hook 'turn-on-auto-fill)
+(setq text-mode-hook 'turn-on-auto-fill)
+
+;; When writing comments, break lines at 80 chars
+(setq comment-auto-fill-only-comments t)
+
+;;; Only break lines for comments in the specified programming modes
+;(defun comment-auto-fill ()
+;  (setq-local comment-auto-fill-only-comments t)
+;  (auto-fill-mode 1))
+;;; C-mode
+;(add-hook 'c-mode-common-hook 'comment-auto-fill)
 
 ;; To add line numbers in the margin
 (global-linum-mode t)
@@ -68,34 +78,13 @@
           (fci-mode 1))))
   (global-fci-mode 1)
 
-
-;; use guess-offset.el
-;(require 'guess-offset)
-
 ;; use dtrt-indent.el
 (require 'dtrt-indent)
 (dtrt-indent-mode 1)
 
-;(defvar just-tab-keymap (make-sparse-keymap) "Keymap for just-tab-mode")
-;(define-minor-mode just-tab-mode
-;  "Just want the TAB key to be a TAB"
-;  :global t :lighter " TAB" :init-value 0 :keymap just-tab-keymap
-;     (define-key just-tab-keymap (kbd "TAB") 'self-insert-command))
-
 ;; To use spaces instead of tabs when indenting
 (setq-default indent-tabs-mode nil)
 (setq indent-tabs-mode nil)
-
-;; smart inference of indentation style
-;(defun infer-indentation-style ()
-  ;; if our source file uses tabs, we use tabs, if spaces spaces, and if
-  ;; neither, we use the current indent-tabs-mode
-;  (let ((space-count (how-many "^  " (point-min) (point-max)))
-;	(tab-count (how-many "^\t" (point-min) (point-max))))
-;    (if (> space-count tab-count) (setq indent-tabs-mode nil))
-;    (if (> tab-count space-count) (setq indent-tabs-mode t))))
-
-;(infer-indentation-style)
 
 ;; set default tab-width (this is for viewing and not for editing, but fuck it...)
 ;; when default is set, tab will always be 2. even for ones that don't have it.
@@ -141,6 +130,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (wheatgrass)))
+ '(package-selected-packages
+   (quote
+    (markdown-mode dtrt-indent auto-complete auto-compile)))
  '(safe-local-variable-values (quote ((auto-fill-mode . 1) (auto-fill-mode)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
