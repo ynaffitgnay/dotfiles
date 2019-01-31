@@ -6,7 +6,7 @@
 
 ;; add this path to the emacs load path for different libraries
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-
+  
 ; enable MELPA packages
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -61,11 +61,11 @@
 ;; Add fill-column-indicator package
 (require 'fill-column-indicator)
 (define-globalized-minor-mode global-fci-mode fci-mode
-  (lambda ()
-    (if (and
-         (not (string-match "^\*.*\*$" (buffer-name)))
-         (not (eq major-mode 'dired-mode)))
-        (fci-mode 1))))
+    (lambda ()
+      (if (and
+           (not (string-match "^\*.*\*$" (buffer-name)))
+           (not (eq major-mode 'dired-mode)))
+          (fci-mode 1))))
   (global-fci-mode 1)
 
 
@@ -113,7 +113,7 @@
 
 ;;make emacs show c code properly (not indent braces per gnu)
 (setq c-default-style "linux")
-;; make it gnu
+;;make it gnu
 ;(setq c-default-style "gnu")
 
 ;; Use c-mode for CUDA
@@ -126,24 +126,23 @@
 ;; reindents the line only if point is to the left of the first non-whitespace character on the line.
 ;; Otherwise it inserts some whitespace.
 (setq c-tab-always-indent nil)
-
+ 
 ;; auto-complete settings
 (require 'auto-complete)
 (global-auto-complete-mode t)
 ;; bind ret to original and tab to finish completion
 (define-key ac-completing-map "\t" 'ac-complete)
 (define-key ac-completing-map "\r" nil)
-; use tab as autocomplete trigger key    
+; use tab as autocomplete trigger key
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
  '(custom-enabled-themes (quote (wheatgrass)))
- '(safe-local-variable-values (quote ((c-default-style "gnu")))))
+ '(package-selected-packages (quote (dtrt-indent auto-complete auto-compile)))
+ '(safe-local-variable-values (quote ((auto-fill-mode . 1) (auto-fill-mode)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -152,18 +151,18 @@
  )
 
 ;; make backups
-(defvar --backup-directory (concat user-emacs-directory "backups"))             
-(if (not (file-exists-p --backup-directory))                                    
-        (make-directory --backup-directory t))                                  
-(setq backup-directory-alist `(("." . ,--backup-directory)))                    
-(setq make-backup-files t               ; backup of a file the first time it is saved.$
-      backup-by-copying t               ; don't clobber symlinks                
-      version-control t                 ; version numbers for backup files      
-      delete-old-versions t             ; delete excess backup files silently   
-      delete-by-moving-to-trash t                                               
-      kept-old-versions 6               ; oldest versions to keep when a new numbered $
-      kept-new-versions 9               ; newest versions to keep when a new numbered $
+(defvar --backup-directory (concat user-emacs-directory "backups"))
+(if (not (file-exists-p --backup-directory))
+        (make-directory --backup-directory t))
+(setq backup-directory-alist `(("." . ,--backup-directory)))
+(setq make-backup-files t               ; backup of a file the first time it is saved.
+      backup-by-copying t               ; don't clobber symlinks
+      version-control t                 ; version numbers for backup files
+      delete-old-versions t             ; delete excess backup files silently
+      delete-by-moving-to-trash t
+      kept-old-versions 6               ; oldest versions to keep when a new numbered backup is made (default: 2)
+      kept-new-versions 9               ; newest versions to keep when a new numbered backup is made (default: 2)
       auto-save-default t               ; auto-save every buffer that visits a file
-      auto-save-timeout 20              ; number of seconds idle time before auto-save$
-      auto-save-interval 200            ; number of keystrokes between auto-saves (def$
-      )           
+      auto-save-timeout 20              ; number of seconds idle time before auto-save (default: 30)
+      auto-save-interval 200            ; number of keystrokes between auto-saves (default: 300)
+      )
