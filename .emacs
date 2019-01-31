@@ -20,7 +20,7 @@
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
-(dolist (package '(dtrt-indent auto-complete))
+(dolist (package '(dtrt-indent auto-complete auto-compile))
   (unless (package-installed-p package)
     (package-install package))
      (require package))
@@ -141,7 +141,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (wheatgrass)))
- '(package-selected-packages (quote (dtrt-indent auto-complete auto-compile)))
  '(safe-local-variable-values (quote ((auto-fill-mode . 1) (auto-fill-mode)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
