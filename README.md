@@ -5,10 +5,24 @@ This process is kind of hacked together and will hopefully become more
 streamlined/ nice over time.
 
 For general setup, you should:
-1. Add your bash aliases to your .bashrc
-   1. add the following line to the system's .bash_profile if it's not already
-      there
+1. set up ~/.emacs.d
+   *  Make sure to clone the .emacs.d repository into home. It's a good idea
+      to do this first in order to avoid having to deal with having other stuff
+      in the directory.
+
+1. run setup.sh for each of the modules
+   *  if .bash_profile already existed, make sure that it also starts ssh agent.
+      add the following lines to the system's .bash_profile if they're not
+      already there
       ```
-      
+      if [ -f ~/.bashrc ]; then
+  . ~/.bashrc
+fi
+
+# get ssh-agent going
+# don't want ssh-agent in .bashrc because it prevents scp
+eval "$(ssh-agent -s)"
+ssh-add
+
       ```
-1. Run an ssh-agent in your .bash_profile
+1. make a ~/.bash_aliases for the local machine
