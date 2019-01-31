@@ -78,9 +78,17 @@
           (fci-mode 1))))
   (global-fci-mode 1)
 
-;; use dtrt-indent.el
+;; use dtrt-indent.el 
 (require 'dtrt-indent)
+;; turn dtrt-indent on unless in fundamental-mode
 (dtrt-indent-mode 1)
+(electric-indent-mode -1)
+;(add-hook 'prog-mode-hook (lambda ()
+;                            (unless (eq major-mode 'fundamental-mode)
+;                              (dtrt-indent-mode))))
+
+;; turn of dtrt-indent for fundamental-mode
+;(add-hook 'fundamental-mode-hook (lambda () (dtrt-indent-mode -1)))
 
 ;; To use spaces instead of tabs when indenting
 (setq-default indent-tabs-mode nil)
