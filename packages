@@ -1,0 +1,8 @@
+# globally required packages
+stow
+findutils
+grep
+curl
+libtool
+htop
+tree
