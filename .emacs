@@ -20,7 +20,7 @@
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
-(dolist (package '(dtrt-indent auto-complete auto-compile))
+(dolist (package '(dtrt-indent auto-complete))
   (unless (package-installed-p package)
     (package-install package))
      (require package))
