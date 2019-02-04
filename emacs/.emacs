@@ -20,10 +20,20 @@
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
-(dolist (package '(dtrt-indent auto-complete markdown-mode))
-  (unless (package-installed-p package)
-    (package-install package))
-     (require package))
+;(dolist (package '(dtrt-indent auto-complete markdown-mode))
+;  (unless (package-installed-p package)
+;    (package-install package))
+;     (require package))
+
+(setq n 0)                                  ; set n as 0
+(dolist (pkg '(dtrt-indent auto-complete markdown-mode))               ; for each pkg in list
+  (unless (or                               ; unless
+           (package-installed-p pkg)        ; pkg is installed or
+           (assoc pkg                       ; pkg is in the archive list
+                  package-archive-contents))
+    (setq n (+ n 1))))                      ; add one to n
+(when (> n 0)                               ; if n > 0, 
+  (package-refresh-contents))               ; refresh packages
 
 ;; To change the font size under X.
 ; (set-default-font "9x15")
