@@ -20,13 +20,10 @@
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
-;(dolist (package '(dtrt-indent auto-complete markdown-mode))
-;  (unless (package-installed-p package)
-;    (package-install package))
-;     (require package))
 
 (setq n 0)                                  ; set n as 0
-(dolist (pkg '(dtrt-indent auto-complete markdown-mode))               ; for each pkg in list
+(dolist (pkg '(dtrt-indent                  ; for each pkg in list
+               auto-complete markdown-mode)) 
   (unless (or                               ; unless
            (package-installed-p pkg)        ; pkg is installed or
            (assoc pkg                       ; pkg is in the archive list
