@@ -1,12 +1,6 @@
-; from the template file /lusr/share/udb/pub/dotfiles/emacs
-;
-; This is just to give you some idea of the things you can set
-; in your .emacs file.  If you want to use any of these commands
-; remove the ";" from in front of the line.
-
 ;; add this path to the emacs load path for different libraries
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-  
+
 ; enable MELPA packages
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -18,20 +12,34 @@
   (when (< emacs-major-version 24)
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+
+;; activate installed packages
 (package-initialize)
 
+;; make sure that the proper packages are installed
+(defun ensure-package-installed (&rest packages)
+  "Assure every package is installed, ask for installation if it’s not.
 
-(setq n 0)                                  ; set n as 0
-(dolist (pkg '(dtrt-indent                  ; for each pkg in list
-               auto-complete markdown-mode)) 
-  (unless (or                               ; unless
-           (package-installed-p pkg)        ; pkg is installed or
-           (assoc pkg                       ; pkg is in the archive list
-                  package-archive-contents))
-    (setq n (+ n 1))))                      ; add one to n
-(when (> n 0)                               ; if n > 0, 
-  (package-refresh-contents))               ; refresh packages
+Return a list of installed packages or nil for every skipped package."
+  (mapcar
+   (lambda (package)
+     ;; (package-installed-p 'evil)
+     (if (package-installed-p package)
+         nil
+       (if (y-or-n-p (format "Package %s is missing. Install it? " package))
+           (package-install package)
+         package)))
+   packages))
 
+;; make sure to have downloaded archive description.
+;; Or use package-archive-contents as suggested by Nicolas Dudebout
+(or (file-exists-p package-user-dir)
+    (package-refresh-contents))
+
+;; Ensure the packages in the list are installed
+(mapcar 'ensure-package-installed '(dtrt-indent async diff       ; for each pkg in list
+                                    auto-complete markdown-mode))
+ 
 ;; To change the font size under X.
 ; (set-default-font "9x15")
 
@@ -51,6 +59,10 @@
 
 ;; Set your term type to vt100
 ; (load "term/vt100")
+
+;; Asynchronously run dired commands for copying, renaming, and symlinking
+(autoload 'dired-async-mode "dired-async.el" nil t)
+(dired-async-mode 1)
 
 ;; When in text (or related mode) break the lines at 80 chars
 (setq text-mode-hook 'turn-on-auto-fill)
@@ -138,6 +150,52 @@
 (define-key ac-completing-map "\t" 'ac-complete)
 (define-key ac-completing-map "\r" nil)
 ; use tab as autocomplete trigger key
+
+
+;; Define function to get diff between two buffers
+(require 'diff)
+(require 'async)
+(defun diff-buffers-without-temp-files (buffer1 buffer2 &optional switches)
+  "Run diff program on BUFFER1 and BUFFER2.
+Make the comparison without the creation of temporary files.
+
+When called interactively with a prefix argument, prompt
+interactively for diff switches.  Otherwise, the switches
+specified in the variable `diff-switches' are passed to the diff command."
+  (interactive
+   (list (read-buffer "buffer1: " (current-buffer))
+         (read-buffer "buffer2: " (current-buffer))
+         (diff-switches)))
+  (or switches (setq switches diff-switches))
+  (unless (listp switches) (setq switches (list switches)))
+  (let ((buffers (list buffer1 buffer2))
+        (buf (get-buffer-create "*diff-buffers*"))
+        fifos res)
+    (dotimes (_ 2) (push (make-temp-name "/tmp/pipe") fifos))
+    (setq fifos (nreverse fifos))
+    (with-current-buffer buf (erase-buffer))
+    (unwind-protect
+        (progn
+          (dotimes (i 2)
+            (let ((cmd (format "cat > %s" (nth i fifos))))
+              (call-process "mkfifo" nil nil nil (nth i fifos))
+              (async-start
+               `(lambda ()
+                  (with-temp-buffer
+                    (insert ,(with-current-buffer (nth i buffers) (buffer-string)))
+                    (call-process-region
+                     1 (point-max) shell-file-name nil nil nil
+                     shell-command-switch ,cmd))))))
+          (setq res (apply #'call-process diff-command nil buf nil (car fifos) (cadr fifos) switches))
+          (if (zerop res)
+              (message "Buffers have same content")
+            (display-buffer buf)
+            (with-current-buffer buf (diff-mode))
+            (message "Buffer contents are different"))
+          res)
+      ;; Clean up.
+      (dolist (x fifos)
+        (and (file-exists-p x) (delete-file x))))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
