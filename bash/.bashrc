@@ -143,6 +143,7 @@ alias rm="rm -vi"
 alias cp="cp -v"
 alias more='view -'
 alias slime='screen -S VSlime'
+alias diff='diff -ys'
 
 # Git Aliases
 alias gcl='git clone'
@@ -165,7 +166,8 @@ alias gp='git push'
 alias gpo='git push origin'
 alias gpu='git push --set-upstream'
 alias gpom='git push origin master'
-alias gdv='git diff -w "$@" | vim -R -'
+alias gdv='git diff -w "$@" | vim -R -'   # ignore whitespace and open read-only
+alias gde=$'git diff -w "$@" | emacs -nw --insert <(cat) </dev/tty --eval \'(setq buffer-read-only t)\''
 alias gc='git commit -v'
 alias gca='git commit -v -a'
 alias gcm='git commit -v -m'
