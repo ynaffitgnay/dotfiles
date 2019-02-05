@@ -143,7 +143,6 @@ alias rm="rm -vi"
 alias cp="cp -v"
 alias more='view -'
 alias slime='screen -S VSlime'
-alias diff='diff -ys'
 
 # Git Aliases
 alias gcl='git clone'

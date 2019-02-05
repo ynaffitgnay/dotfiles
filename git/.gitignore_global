@@ -1,4 +1,4 @@
-# -*- mode: gitignore; -*-
+# -*- gitignore for emacs -*-
 *~
 \#*\#
 /.emacs.desktop
@@ -62,7 +62,6 @@ tags
 *.pyc
 __pycache__
 
-#comment these out bc might need them for OS
 # Compiled source #
 ###################
 *.com
@@ -85,7 +84,7 @@ __pycache__
 *.tar
 *.zip
 
-ogs and databases #
+# Logs and databases #
 ######################
 *.log
 *.sql
