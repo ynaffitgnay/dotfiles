@@ -39,14 +39,14 @@ Return a list of installed packages or nil for every skipped package."
 (setq reqd-packages '(dtrt-indent async diff magit auto-complete
           			      markdown-mode))
 
-;; Ensure that all of the listed packages are in the downloaded archive
+;; Ensure that all of the listed packages installed.
+;; Otherwise, refresh the package archive to install the correct version.
 (setq n 0)                                  ; set n as 0
 (dolist (pkg reqd-packages)                 ; for each pkg in list
-  (unless (or                               ; unless
-           (package-installed-p pkg)        ; pkg is installed or
-           (assoc pkg                       ; pkg is in the archive list
-                  package-archive-contents))
-    (setq n (+ n 1))))                      ; add one to n
+  (unless
+    (package-installed-p pkg)               ; pkg is installed
+      (setq n (+ n 1))))                    ; increment n
+
 (when (> n 0)                               ; if n > 0, 
   (package-refresh-contents))               ; refresh packages
 
