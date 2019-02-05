@@ -31,14 +31,26 @@ Return a list of installed packages or nil for every skipped package."
          package)))
    packages))
 
-;; make sure to have downloaded archive description.
-;; Or use package-archive-contents as suggested by Nicolas Dudebout
-(or (file-exists-p package-user-dir)
+;; make sure to have a downloaded archive description.
+(unless package-archive-contents
     (package-refresh-contents))
 
+;; Define list of important packages
+(setq reqd-packages '(dtrt-indent async diff magit auto-complete
+			      markdown-mode))
+
 ;; Ensure the packages in the list are installed
-(mapcar 'ensure-package-installed '(dtrt-indent async diff       ; for each pkg in list
-                                    auto-complete markdown-mode))
+(mapcar 'ensure-package-installed reqd-packages)
+
+(setq n 0)                                  ; set n as 0
+(dolist (pkg reqd-packages)                 ; for each pkg in list
+  (unless (or                               ; unless
+           (package-installed-p pkg)        ; pkg is installed or
+           (assoc pkg                       ; pkg is in the archive list
+                  package-archive-contents))
+    (setq n (+ n 1))))                      ; add one to n
+(when (> n 0)                               ; if n > 0, 
+  (package-refresh-contents))               ; refresh packages
  
 ;; To change the font size under X.
 ; (set-default-font "9x15")
@@ -85,7 +97,7 @@ Return a list of installed packages or nil for every skipped package."
 
 ;; Set fill-column to 80
 (setq-default fill-column 80)
-(setq fill-column 80)
+;(setq fill-column 80)
 
 ;; Add fill-column-indicator package
 (require 'fill-column-indicator)
@@ -97,35 +109,26 @@ Return a list of installed packages or nil for every skipped package."
           (fci-mode 1))))
   (global-fci-mode 1)
 
-;; use dtrt-indent.el 
-(require 'dtrt-indent)
-;; turn dtrt-indent on unless in fundamental-mode
-(dtrt-indent-mode 1)
-(electric-indent-mode -1)
-;(add-hook 'prog-mode-hook (lambda ()
-;                            (unless (eq major-mode 'fundamental-mode)
-;                              (dtrt-indent-mode))))
-
-;; turn of dtrt-indent for fundamental-mode
-;(add-hook 'fundamental-mode-hook (lambda () (dtrt-indent-mode -1)))
-
 ;; To use spaces instead of tabs when indenting
 (setq-default indent-tabs-mode nil)
-(setq indent-tabs-mode nil)
+;(setq indent-tabs-mode nil)
+
+;; use dtrt-indent.el 
+(require 'dtrt-indent)
+;; turn dtrt-indent on globally
+(setq-default dtrt-indent-mode 1)
+(electric-indent-mode -1)
 
 ;; set default tab-width (this is for viewing and not for editing, but fuck it...)
 ;; when default is set, tab will always be 2. even for ones that don't have it.
 ;; good for if you want to untabify a file
 (setq-default tab-width 2)
-(setq tab-width 2)
+;(setq tab-width 2)
 (setq indent-line-function 'insert-tab)
 
-;; make this consistent
+;; make the indentation levels consistent
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
-
-;; change the indentation level for c
-;(setq-default c-basic-offset 2)
 
 ;;make emacs show c code properly (not indent braces per gnu)
 (setq c-default-style "linux")
@@ -139,7 +142,8 @@ Return a list of installed packages or nil for every skipped package."
 ;; set the tab stops to use (default is 8 spaces apart)
 (setq tab-stop-list (number-sequence 2 120 2))
 
-;; reindents the line only if point is to the left of the first non-whitespace character on the line.
+;; reindents the line only if point is to the left of the first non-whitespace 
+;; character on the line.
 ;; Otherwise it inserts some whitespace.
 (setq c-tab-always-indent nil)
  
