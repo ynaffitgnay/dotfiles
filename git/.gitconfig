@@ -2,7 +2,7 @@
 	name = Tiffany Yang
 	email = tiffanyyang@utexas.edu
 [core]
-	excludesfile = /home/tiffany/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [push]
 	default = simple
   
