@@ -37,11 +37,9 @@ Return a list of installed packages or nil for every skipped package."
 
 ;; Define list of important packages
 (setq reqd-packages '(dtrt-indent async diff magit auto-complete
-			      markdown-mode))
+          			      markdown-mode))
 
-;; Ensure the packages in the list are installed
-(mapcar 'ensure-package-installed reqd-packages)
-
+;; Ensure that all of the listed packages are in the downloaded archive
 (setq n 0)                                  ; set n as 0
 (dolist (pkg reqd-packages)                 ; for each pkg in list
   (unless (or                               ; unless
@@ -51,10 +49,10 @@ Return a list of installed packages or nil for every skipped package."
     (setq n (+ n 1))))                      ; add one to n
 (when (> n 0)                               ; if n > 0, 
   (package-refresh-contents))               ; refresh packages
- 
-;; To change the font size under X.
-; (set-default-font "9x15")
 
+;; Ensure the packages in the list are installed
+(mapcar 'ensure-package-installed reqd-packages)
+ 
 ;; Turn off toolbar
 (if (display-graphic-p)
     (progn
