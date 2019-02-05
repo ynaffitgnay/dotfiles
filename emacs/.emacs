@@ -16,6 +16,29 @@
 ;; activate installed packages
 (package-initialize)
 
+;; make sure to have a downloaded archive description.
+(unless package-archive-contents
+    (package-refresh-contents))
+
+;; Define list of important packages
+(setq reqd-packages '(dtrt-indent async diff magit auto-complete
+          			      markdown-mode))
+
+;; Remove packages that require the newest version of emacs from the list
+(when (< emacs-major-version 25) (dolist (pkg '(magit nil))
+  (setq reqd-packages (delq pkg reqd-packages))))
+
+;; Ensure that all of the listed packages installed.
+;; Otherwise, refresh the package archive to install the correct version.
+(setq n 0)                                  ; set n as 0
+(dolist (pkg reqd-packages)                 ; for each pkg in list
+  (unless
+    (package-installed-p pkg)               ; pkg is installed
+      (setq n (+ n 1))))                    ; increment n
+
+(when (> n 0)                               ; if n > 0, 
+  (package-refresh-contents))               ; refresh packages
+
 ;; make sure that the proper packages are installed
 (defun ensure-package-installed (&rest packages)
   "Assure every package is installed, ask for installation if it’s not.
@@ -30,25 +53,6 @@ Return a list of installed packages or nil for every skipped package."
            (package-install package)
          package)))
    packages))
-
-;; make sure to have a downloaded archive description.
-(unless package-archive-contents
-    (package-refresh-contents))
-
-;; Define list of important packages
-(setq reqd-packages '(dtrt-indent async diff magit auto-complete
-          			      markdown-mode))
-
-;; Ensure that all of the listed packages installed.
-;; Otherwise, refresh the package archive to install the correct version.
-(setq n 0)                                  ; set n as 0
-(dolist (pkg reqd-packages)                 ; for each pkg in list
-  (unless
-    (package-installed-p pkg)               ; pkg is installed
-      (setq n (+ n 1))))                    ; increment n
-
-(when (> n 0)                               ; if n > 0, 
-  (package-refresh-contents))               ; refresh packages
 
 ;; Ensure the packages in the list are installed
 (mapcar 'ensure-package-installed reqd-packages)
