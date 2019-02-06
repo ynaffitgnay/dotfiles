@@ -204,6 +204,8 @@ alias gignored="git ls-files -i --exclude-standard"
 alias gnew="git log HEAD@{1}..HEAD@{0}"
 # Add uncommitted and unstaged changes to the last commit
 alias gcaa="git commit -a --amend -C HEAD"
+# Amend commit message
+alias gcam="git commit --amend"
 
 # shortcuts for local aliases
 alias lba='less ~/.bash_aliases'
@@ -283,3 +285,5 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 #fontsize 12
 
 #eval $(thefuck --alias)
+
+cd -
