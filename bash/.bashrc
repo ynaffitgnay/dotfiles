@@ -19,8 +19,16 @@ HISTCONTROL=ignoredups
 shopt -s histappend
 # append the current session history to the content of the history file
 PROMPT_COMMAND='history -a'
-# resize window each with each prompt (good for VM console)
-#export PROMPT_COMMAND="resize &>/dev/null; $PROMPT_COMMAND"
+
+# define quiet resize
+qres() {
+  resize &>/dev/null
+}
+
+# resize window each with each prompt if using serial application
+if [ $(tty) == '/dev/ttyS0' ]; then
+  trap qres DEBUG
+fi
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 # Leave blank for unlimited history
