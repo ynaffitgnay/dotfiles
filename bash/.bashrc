@@ -192,6 +192,12 @@ alias gt="git tag"
 alias gta="git tag -a"
 alias gtd="git tag -d"
 alias gtl="git tag -l"
+
+# get 10 largest files in the repository
+alias g10l="git ls-tree -r -t -l --full-name HEAD | sort -n -k 4 | tail -n 10"
+
+# Currently tracked files that would be ignored given the current .gitignores
+alias gignored="git ls-files -i --exclude-standard"  
   
 # From http://blogs.atlassian.com/2014/10/advanced-git-aliases/
 # Show commits since last pull
