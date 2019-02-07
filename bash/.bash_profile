@@ -2,6 +2,8 @@ if [ -f ~/.bashrc ]; then
   . ~/.bashrc
 fi
 
+cd -
+
 # get ssh-agent going
 # don't want ssh-agent in .bashrc because it prevents scp
 eval "$(ssh-agent -s)"
