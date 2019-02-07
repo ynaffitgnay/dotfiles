@@ -286,4 +286,4 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 #eval $(thefuck --alias)
 
-cd -
+'cd -'
