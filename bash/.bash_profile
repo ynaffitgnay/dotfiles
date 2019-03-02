@@ -11,3 +11,6 @@ ssh-add
 
 # make sure keyboard maps properly over X??
 setxkbmap -rules evdev -model pc104 -layout us
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
