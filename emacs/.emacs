@@ -119,7 +119,7 @@ Return a list of installed packages or nil for every skipped package."
 (require 'dtrt-indent)
 ;; turn dtrt-indent on globally
 (setq-default dtrt-indent-mode 1)
-(electric-indent-mode -1)
+;(electric-indent-mode -1)
 
 ;; set default tab-width (this is for viewing and not for editing, but fuck it...)
 ;; when default is set, tab will always be 2. even for ones that don't have it.
