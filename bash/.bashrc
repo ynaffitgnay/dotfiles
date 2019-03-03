@@ -272,7 +272,8 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.scripts"
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
-
+# Remove duplicates from path
+export PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++{if (NR > 1) printf ORS; printf $a[$1]}')
 
 # LESS man page colors (makes Man pages more readable).
 export LESS_TERMCAP_mb=$'\E[01;31m'
