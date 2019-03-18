@@ -22,7 +22,7 @@
 
 ;; Define list of important packages
 (setq reqd-packages '(dtrt-indent async diff magit auto-complete
-          			      markdown-mode))
+          			      markdown-mode fill-column-indicator))
 
 ;; Remove packages that require the newest version of emacs from the list
 (when (< emacs-major-version 25) (dolist (pkg '(magit nil))
