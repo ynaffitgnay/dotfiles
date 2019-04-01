@@ -162,16 +162,16 @@ Return a list of installed packages or nil for every skipped package."
   (global-map "C-x"
               :color red)
   "other window"
-  ("<right>" other-window "→")
-  ("<left>" (lambda () (interactive) (other-window -1)) "←"))
+  ("<down>" other-window "↓")
+  ("<up>" (lambda () (interactive) (other-window -1)) "↑"))
 
 ;; Define a hydra binding to use arrow keys to jump between buffers
 (defhydra hydra-other-buffer
   (global-map "C-x"
               :color red)
   "other buffer"
-  ("<down>" next-buffer "↓")
-  ("<up>" previous-buffer "↑"))
+  ("<right>" next-buffer "→")
+  ("<left>" previous-buffer "←"))
   
 ;; Define function to get diff between two buffers
 (require 'diff)
