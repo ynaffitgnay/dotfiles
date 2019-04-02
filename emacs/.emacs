@@ -21,8 +21,8 @@
     (package-refresh-contents))
 
 ;; Define list of important packages
-(setq reqd-packages '(dtrt-indent async diff magit auto-complete
-          			      markdown-mode fill-column-indicator))
+(setq reqd-packages '(dtrt-indent async diff magit auto-complete hydra
+          			      markdown-mode))
 
 ;; Remove packages that require the newest version of emacs from the list
 (when (< emacs-major-version 25) (dolist (pkg '(magit nil))
@@ -157,7 +157,22 @@ Return a list of installed packages or nil for every skipped package."
 (define-key ac-completing-map "\r" nil)
 ; use tab as autocomplete trigger key
 
+;; Define a hydra binding to use arrow keys to jump between windows
+(defhydra hydra-other-window
+  (global-map "C-x"
+              :color red)
+  "other window"
+  ("<down>" other-window "↓")
+  ("<up>" (lambda () (interactive) (other-window -1)) "↑"))
 
+;; Define a hydra binding to use arrow keys to jump between buffers
+(defhydra hydra-other-buffer
+  (global-map "C-x"
+              :color red)
+  "other buffer"
+  ("<right>" next-buffer "→")
+  ("<left>" previous-buffer "←"))
+  
 ;; Define function to get diff between two buffers
 (require 'diff)
 (require 'async)
@@ -230,7 +245,29 @@ specified in the variable `diff-switches' are passed to the diff command."
  '(package-selected-packages
    (quote
     (markdown-mode dtrt-indent auto-complete auto-compile)))
- '(safe-local-variable-values (quote ((auto-fill-mode . 1) (auto-fill-mode)))))
+ '(safe-local-variable-values
+   (quote
+    ((c-file-offsets
+      (block-close . 0)
+      (brace-list-close . 0)
+      (brace-list-entry . 0)
+      (brace-list-intro . +)
+      (case-label . 0)
+      (class-close . 0)
+      (defun-block-intro . +)
+      (defun-close . 0)
+      (defun-open . 0)
+      (else-clause . 0)
+      (inclass . +)
+      (label . 0)
+      (statement . 0)
+      (statement-block-intro . +)
+      (statement-case-intro . +)
+      (statement-cont . +)
+      (substatement . +)
+      (topmost-intro . 0))
+     (auto-fill-mode . 1)
+     (auto-fill-mode)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
