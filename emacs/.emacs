@@ -219,24 +219,6 @@ specified in the variable `diff-switches' are passed to the diff command."
         (and (file-exists-p x) (delete-file x))))))
 
 (custom-set-variables
- '(verilog-align-ifelse t)
- '(verilog-auto-delete-trailing-whitespace t)
- '(verilog-auto-inst-param-value t)
- '(verilog-auto-inst-vector nil)
- ;'(verilog-auto-lineup (quote all))
- '(verilog-auto-lineup nil)
- '(verilog-auto-newline nil)
- '(verilog-auto-save-policy nil)
- '(verilog-auto-template-warn-unused t)
- '(verilog-case-indent 2)
- '(verilog-cexp-indent 2)
- '(verilog-highlight-grouping-keywords t)
- '(verilog-highlight-modules t)
- '(verilog-indent-level 2)
- '(verilog-indent-level-behavioral 2)
- '(verilog-indent-level-declaration 2)
- '(verilog-indent-level-module 2)
- '(verilog-tab-to-comment t)
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -267,7 +249,24 @@ specified in the variable `diff-switches' are passed to the diff command."
       (substatement . +)
       (topmost-intro . 0))
      (auto-fill-mode . 1)
-     (auto-fill-mode)))))
+     (auto-fill-mode))))
+ '(verilog-align-ifelse t)
+ '(verilog-auto-delete-trailing-whitespace t)
+ '(verilog-auto-inst-param-value t)
+ '(verilog-auto-inst-vector nil)
+ '(verilog-auto-lineup nil)
+ '(verilog-auto-newline nil)
+ '(verilog-auto-save-policy nil)
+ '(verilog-auto-template-warn-unused t)
+ '(verilog-case-indent 2)
+ '(verilog-cexp-indent 2)
+ '(verilog-highlight-grouping-keywords t)
+ '(verilog-highlight-modules t)
+ '(verilog-indent-level 2)
+ '(verilog-indent-level-behavioral 2)
+ '(verilog-indent-level-declaration 2)
+ '(verilog-indent-level-module 2)
+ '(verilog-tab-to-comment t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
