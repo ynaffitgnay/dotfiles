@@ -251,13 +251,19 @@ specified in the variable `diff-switches' are passed to the diff command."
      (auto-fill-mode . 1)
      (auto-fill-mode))))
  '(verilog-align-ifelse t)
+ '(verilog-auto-delete-trailing-whitespace t)
  '(verilog-auto-indent-on-newline nil)
+ '(verilog-auto-lineup (quote ignore))
+ '(verilog-auto-template-warn-unused t)
+ '(verilog-highlight-grouping-keywords t)
+ '(verilog-highlight-modules t)
  '(verilog-indent-begin-after-if nil)
  '(verilog-indent-level 2)
  '(verilog-indent-level-behavioral 2)
  '(verilog-indent-level-declaration 2)
  '(verilog-indent-level-directive 0)
- '(verilog-indent-level-module 2))
+ '(verilog-indent-level-module 2)
+ '(verilog-tab-to-comment nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
