@@ -18,13 +18,14 @@ For general setup, you should:
       already there
       ```
       if [ -f ~/.bashrc ]; then
-  . ~/.bashrc
-fi
+       . ~/.bashrc
+      fi
 
-# get ssh-agent going
-# don't want ssh-agent in .bashrc because it prevents scp
-eval "$(ssh-agent -s)"
-ssh-add
+      # get ssh-agent going
+      # don't want ssh-agent in .bashrc because it prevents scp
+      eval "$(ssh-agent -s)"
+      ssh-add
 
       ```
-1. make a ~/.bash_aliases for the local machine
+1. make a ~/.bash_aliases for the local machine (move over any non-generic bits 
+   from the original ~/.bashrc)
