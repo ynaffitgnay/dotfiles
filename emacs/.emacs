@@ -101,6 +101,9 @@ Return a list of installed packages or nil for every skipped package."
 (setq-default fill-column 80)
 ;(setq fill-column 80)
 
+;; Turn off emacs alarms
+(setq ring-bell-function 'ignore)
+
 ;; Add fill-column-indicator package
 (require 'fill-column-indicator)
 (define-globalized-minor-mode global-fci-mode fci-mode
