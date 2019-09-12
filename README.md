@@ -22,7 +22,7 @@ For general setup, you should:
       fi
 
       # get ssh-agent going
-      # don't want ssh-agent in .bashrc because it prevents scp
+      # don't want ssh-agent in .bashrc because it will mess with scp
       eval "$(ssh-agent -s)"
       ssh-add
 
