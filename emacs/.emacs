@@ -160,6 +160,9 @@ Return a list of installed packages or nil for every skipped package."
 (define-key ac-completing-map "\r" nil)
 ; use tab as autocomplete trigger key
 
+
+
+
 ;; Define a hydra binding to use arrow keys to jump between windows
 (defhydra hydra-other-window
   (global-map "C-x"
@@ -255,7 +258,8 @@ specified in the variable `diff-switches' are passed to the diff command."
      (auto-fill-mode))))
  '(verilog-align-ifelse t)
  '(verilog-auto-delete-trailing-whitespace t)
- '(verilog-auto-indent-on-newline nil)
+ '(verilog-auto-newline nil)
+ '(verilog-auto-indent-on-newline t)
  '(verilog-auto-lineup (quote ignore))
  '(verilog-auto-template-warn-unused t)
  '(verilog-highlight-grouping-keywords t)

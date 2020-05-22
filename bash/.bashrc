@@ -196,6 +196,9 @@ alias gta="git tag -a"
 alias gtd="git tag -d"
 alias gtl="git tag -l"
 
+# see the file history of commits w diffs, including renames
+alias ghist="git log --follow -p -- "
+
 # get 10 largest files in the repository
 alias g10l="git ls-tree -r -t -l --full-name HEAD | sort -n -k 4 | tail -n 10"
 
