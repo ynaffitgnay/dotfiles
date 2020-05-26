@@ -115,6 +115,8 @@ fi
 
 # some more ls aliases
 alias ll="ls -alFh"
+# ls -l with most recently modified at top
+alias llt="ls -alFht"
 alias la="ls -A"
 alias l="ls -CF"
 alias sl="ls -F"
