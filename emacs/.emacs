@@ -178,6 +178,9 @@ Return a list of installed packages or nil for every skipped package."
   "other buffer"
   ("<right>" next-buffer "→")
   ("<left>" previous-buffer "←"))
+
+;; Change smerge prefix
+(setq smerge-command-prefix "\C-cv")
   
 ;; Define function to get diff between two buffers
 (require 'diff)
@@ -265,11 +268,11 @@ specified in the variable `diff-switches' are passed to the diff command."
  '(verilog-highlight-grouping-keywords t)
  '(verilog-highlight-modules t)
  '(verilog-indent-begin-after-if nil)
- '(verilog-indent-level 2)
- '(verilog-indent-level-behavioral 2)
- '(verilog-indent-level-declaration 2)
+ '(verilog-indent-level 4)
+ '(verilog-indent-level-behavioral 4)
+ '(verilog-indent-level-declaration 4)
  '(verilog-indent-level-directive 0)
- '(verilog-indent-level-module 2)
+ '(verilog-indent-level-module 4)
  '(verilog-tab-to-comment nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
