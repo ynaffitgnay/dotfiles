@@ -25,7 +25,7 @@
           			      markdown-mode))
 
 ;; Remove packages that require the newest version of emacs from the list
-(when (< emacs-major-version 25) (dolist (pkg '(magit nil))
+(when (< emacs-major-version 25) (dolist (pkg '(magit markdown-mode))
   (setq reqd-packages (delq pkg reqd-packages))))
 
 ;; Ensure that all of the listed packages installed.
@@ -117,6 +117,10 @@ Return a list of installed packages or nil for every skipped package."
 ;; To use spaces instead of tabs when indenting
 (setq-default indent-tabs-mode nil)
 ;(setq indent-tabs-mode nil)
+
+;; Use winner mode
+(when (fboundp 'winner-mode)
+    (winner-mode 1))
 
 ;; use dtrt-indent.el 
 (require 'dtrt-indent)
