@@ -229,7 +229,7 @@ specified in the variable `diff-switches' are passed to the diff command."
  '(custom-enabled-themes (quote (wheatgrass)))
  '(package-selected-packages
    (quote
-    (markdown-mode dtrt-indent auto-complete auto-compile)))
+    (auctex markdown-mode dtrt-indent auto-complete auto-compile)))
  '(safe-local-variable-values
    (quote
     ((c-file-offsets
