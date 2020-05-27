@@ -50,6 +50,9 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
+# Disable Ctrl-s (scroll lock) in terminal
+stty -ixon
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -112,6 +115,8 @@ fi
 
 # some more ls aliases
 alias ll="ls -alFh"
+# ls -l with most recently modified at top
+alias llt="ls -alFht"
 alias la="ls -A"
 alias l="ls -CF"
 alias sl="ls -F"
@@ -192,6 +197,9 @@ alias gt="git tag"
 alias gta="git tag -a"
 alias gtd="git tag -d"
 alias gtl="git tag -l"
+
+# see the file history of commits w diffs, including renames
+alias ghist="git log --follow -p -- "
 
 # get 10 largest files in the repository
 alias g10l="git ls-tree -r -t -l --full-name HEAD | sort -n -k 4 | tail -n 10"

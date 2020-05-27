@@ -160,6 +160,9 @@ Return a list of installed packages or nil for every skipped package."
 (define-key ac-completing-map "\r" nil)
 ; use tab as autocomplete trigger key
 
+
+
+
 ;; Define a hydra binding to use arrow keys to jump between windows
 (defhydra hydra-other-window
   (global-map "C-x"
@@ -175,6 +178,9 @@ Return a list of installed packages or nil for every skipped package."
   "other buffer"
   ("<right>" next-buffer "→")
   ("<left>" previous-buffer "←"))
+
+;; Change smerge prefix
+(setq smerge-command-prefix "\C-cv")
   
 ;; Define function to get diff between two buffers
 (require 'diff)
@@ -255,17 +261,18 @@ specified in the variable `diff-switches' are passed to the diff command."
      (auto-fill-mode))))
  '(verilog-align-ifelse t)
  '(verilog-auto-delete-trailing-whitespace t)
- '(verilog-auto-indent-on-newline nil)
+ '(verilog-auto-newline nil)
+ '(verilog-auto-indent-on-newline t)
  '(verilog-auto-lineup (quote ignore))
  '(verilog-auto-template-warn-unused t)
  '(verilog-highlight-grouping-keywords t)
  '(verilog-highlight-modules t)
  '(verilog-indent-begin-after-if nil)
- '(verilog-indent-level 2)
- '(verilog-indent-level-behavioral 2)
- '(verilog-indent-level-declaration 2)
+ '(verilog-indent-level 4)
+ '(verilog-indent-level-behavioral 4)
+ '(verilog-indent-level-declaration 4)
  '(verilog-indent-level-directive 0)
- '(verilog-indent-level-module 2)
+ '(verilog-indent-level-module 4)
  '(verilog-tab-to-comment nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
