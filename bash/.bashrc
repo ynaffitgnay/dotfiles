@@ -149,6 +149,8 @@ alias rm="rm -vi"
 alias cp="cp -v"
 alias more='view -'
 alias slime='screen -S VSlime'
+# Force screen to ask you for a session name
+alias screen='screen -S'
 
 # Git Aliases
 alias gcl='git clone'
