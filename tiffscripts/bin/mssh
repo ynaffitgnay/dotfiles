@@ -1,0 +1,9 @@
+#!/bin/csh
+# Remove host from authorized_hosts and ssh into it
+# usage: mssh user@host
+set userhost=$1
+shift
+set user=`echo $userhost | awk -F@ ' { print $1; } '`
+set host=`echo $userhost | awk -F@ ' { print $2; } '`
+ssh-keygen -R $host
+ssh "$user"@"$host" $*
