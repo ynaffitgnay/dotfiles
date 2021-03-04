@@ -21,7 +21,7 @@
     (package-refresh-contents))
 
 ;; Define list of important packages
-(setq reqd-packages '(dtrt-indent async diff magit auto-complete hydra
+(setq reqd-packages '(async auto-complete diff diffview dtrt-indent hydra magit
           			      markdown-mode))
 
 ;; Remove packages that require the newest version of emacs from the list
@@ -36,7 +36,7 @@
     (package-installed-p pkg)               ; pkg is installed
       (setq n (+ n 1))))                    ; increment n
 
-(when (> n 0)                               ; if n > 0, 
+(when (> n 0)                               ; if n > 0,
   (package-refresh-contents))               ; refresh packages
 
 ;; make sure that the proper packages are installed
@@ -56,7 +56,7 @@ Return a list of installed packages or nil for every skipped package."
 
 ;; Ensure the packages in the list are installed
 (mapcar 'ensure-package-installed reqd-packages)
- 
+
 ;; Turn off toolbar
 (if (display-graphic-p)
     (progn
@@ -65,7 +65,7 @@ Return a list of installed packages or nil for every skipped package."
 ;; Don't ask if it's okay to follow symlinks (just follow them)
 (setq vc-follow-symlinks t)
 
-;; scroll one line at a time (less "jumpy" than defaults)    
+;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 ;(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
@@ -122,7 +122,7 @@ Return a list of installed packages or nil for every skipped package."
 (when (fboundp 'winner-mode)
     (winner-mode 1))
 
-;; use dtrt-indent.el 
+;; use dtrt-indent.el
 (require 'dtrt-indent)
 ;; turn dtrt-indent on globally
 (setq-default dtrt-indent-mode 1)
@@ -151,11 +151,15 @@ Return a list of installed packages or nil for every skipped package."
 ;; set the tab stops to use (default is 8 spaces apart)
 (setq tab-stop-list (number-sequence 2 120 2))
 
-;; reindents the line only if point is to the left of the first non-whitespace 
+;; reindents the line only if point is to the left of the first non-whitespace
 ;; character on the line.
 ;; Otherwise it inserts some whitespace.
 (setq c-tab-always-indent nil)
- 
+
+;; delete trailing whitespace on save
+(setq delete-trailing-lines nil)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; auto-complete settings
 (require 'auto-complete)
 (global-auto-complete-mode t)
@@ -163,9 +167,6 @@ Return a list of installed packages or nil for every skipped package."
 (define-key ac-completing-map "\t" 'ac-complete)
 (define-key ac-completing-map "\r" nil)
 ; use tab as autocomplete trigger key
-
-
-
 
 ;; Define a hydra binding to use arrow keys to jump between windows
 (defhydra hydra-other-window
@@ -185,7 +186,7 @@ Return a list of installed packages or nil for every skipped package."
 
 ;; Change smerge prefix
 (setq smerge-command-prefix "\C-cv")
-  
+
 ;; Define function to get diff between two buffers
 (require 'diff)
 (require 'async)
