@@ -2,10 +2,10 @@
 	name = Tiffany Yang
 	email = tiffanyyang@utexas.edu
 [alias]
-  st = status -sb -uall
-  lg = log --decorate --pretty=oneline --abbrev-commit --graph
-  undocommit = reset --soft HEAD^
-  undopush = push -f origin HEAD^:master
+	st = status -sb -uall
+	lg = log --decorate --pretty=oneline --abbrev-commit --graph
+	undocommit = reset --soft HEAD^
+	undopush = push -f origin HEAD^:master
 [core]
 	excludesfile = ~/.gitignore_global
 [push]
