@@ -208,8 +208,8 @@ alias ghist="git log --follow -p -- "
 alias g10l="git ls-tree -r -t -l --full-name HEAD | sort -n -k 4 | tail -n 10"
 
 # Currently tracked files that would be ignored given the current .gitignores
-alias gignored="git ls-files -i --exclude-standard"  
-  
+alias gignored="git ls-files -i --exclude-standard"
+
 # From http://blogs.atlassian.com/2014/10/advanced-git-aliases/
 # Show commits since last pull
 alias gnew="git log HEAD@{1}..HEAD@{0}"
@@ -277,10 +277,10 @@ cd ~
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.scripts"
+export PATH="$HOME/bin:$PATH"
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 # Remove duplicates from path
