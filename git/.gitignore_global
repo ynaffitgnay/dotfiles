@@ -99,3 +99,10 @@ __pycache__
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# VMware #
+##########
+pxe
+.iscons*
+scons
+*.efi

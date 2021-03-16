@@ -1,6 +1,6 @@
 [User]
 	name = Tiffany Yang
-	email = tiffanyyang@utexas.edu
+	email = ytiffany@vmware.com
 [alias]
 	st = status -sb -uall
 	lg = log --decorate --pretty=oneline --abbrev-commit --graph
