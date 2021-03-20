@@ -5,7 +5,8 @@
 	st = status -sb -uall
 	lg = log --decorate --pretty=oneline --abbrev-commit --graph
 	undocommit = reset --soft HEAD^
-	undopush = push -f origin HEAD^:master
+	current = rev-parse --abbrev-ref HEAD                                         |
+  undopush = !CURRENT=$(git current) && git push -f origin HEAD^:$CURRENT
 [core]
 	excludesfile = ~/.gitignore_global
 [push]
