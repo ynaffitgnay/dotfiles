@@ -152,6 +152,7 @@ alias rm="rm -vi"
 alias cp="cp -v"
 alias more='view -'
 alias slime='screen -S VSlime'
+alias sls='screen -ls'
 
 # Git Aliases
 alias gcl='git clone'
@@ -208,8 +209,8 @@ alias ghist="git log --follow -p -- "
 alias g10l="git ls-tree -r -t -l --full-name HEAD | sort -n -k 4 | tail -n 10"
 
 # Currently tracked files that would be ignored given the current .gitignores
-alias gignored="git ls-files -i --exclude-standard"  
-  
+alias gignored="git ls-files -i --exclude-standard"
+
 # From http://blogs.atlassian.com/2014/10/advanced-git-aliases/
 # Show commits since last pull
 alias gnew="git log HEAD@{1}..HEAD@{0}"
